@@ -2,11 +2,9 @@ package com.example.democoffee.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.property.access.internal.PropertyAccessStrategyNoopImpl;
-import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -16,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "_users")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,7 +28,9 @@ public class User {
     @Column(name = "birthday",nullable = false)
     private LocalDate date;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Like> like;
-
+//    @OneToMany(mappedBy = "userId")
+//    private Set<Like> user;
+//
+    @ManyToMany
+    private Set<UserAttachment> attachments;
 }

@@ -3,6 +3,8 @@ package com.example.democoffee.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Builder
@@ -10,19 +12,18 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "likes")
-@IdClass(UserLikeKey.class)
-public class Like {
+public class Like implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id",name ="user_id")
-    private User user;
+    @JoinColumn(referencedColumnName = "id" )
+    private User userId;
 
     @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "coffee_id",referencedColumnName = "id")
-    private Coffee coffee;
+    @JoinColumn(referencedColumnName = "id")
+    private Coffee coffeeId;
 
 
 }

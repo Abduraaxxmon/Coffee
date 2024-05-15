@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: demoCoffee
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+  datasource:
+    username: postgres
+    password: Abdu2004
+    url: jdbc:postgresql://localhost:5432/postgres

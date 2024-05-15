@@ -2,12 +2,14 @@ package com.example.democoffee.service;
 
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface ServiceInterface<Request,Response>{
-    ResponseEntity<?> create(Request request);
-    ResponseEntity<?> read(Long id);
-    ResponseEntity<?> readAll();
-    ResponseEntity<?> update(Long id,Request request);
-    ResponseEntity<?> delete(Long id);
+    Response create(Request request);
+    Response read(Long id);
+    List<Response> readAll();
+    Response update(Long id,Request request);
+    void delete(Long id);
 
 
 }

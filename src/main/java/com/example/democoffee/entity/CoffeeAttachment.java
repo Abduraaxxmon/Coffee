@@ -4,25 +4,25 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Set;
 
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
-@Table(name = "categories")
-public class Category implements Serializable {
+@Table(name ="attachment_coffee")
+public class CoffeeAttachment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "name")
     private String name;
+    private String path;
+    private String contentType;
+    private String extension;
+    private Long size;
 
-    @OneToMany(mappedBy = "category")
-    private Set<Coffee> coffeeSet;
-
-
+    @JoinColumn
+    @ManyToOne
+    private Coffee coffee;
 }
