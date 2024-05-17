@@ -31,6 +31,6 @@ public class User implements Serializable {
 //    @OneToMany(mappedBy = "userId")
 //    private Set<Like> user;
 //
-    @ManyToMany
+    @OneToMany(mappedBy = "user")
     private Set<UserAttachment> attachments;
 }

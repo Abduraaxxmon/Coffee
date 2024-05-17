@@ -1,12 +1,13 @@
 package com.example.democoffee.service.Impl;
 
-import com.example.democoffee.entity.UserAttachment;
 import com.example.democoffee.entity.User;
+import com.example.democoffee.entity.UserAttachment;
 import com.example.democoffee.model.UserAttachmentResponseDto;
 import com.example.democoffee.repository.UserAttachmentRepository;
 import com.example.democoffee.repository.UserRepository;
-import com.example.democoffee.service.AttachmentInterface;
+import com.example.democoffee.service.UserAttachmentInterface;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,13 +19,13 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class UserAttachmentServiceImpl implements AttachmentInterface {
+public class UserAttachmentServiceImpl implements UserAttachmentInterface {
 
     private final UserAttachmentRepository attachmentrepository;
     private final UserRepository userRepository;
 
     @Override
-    public UserAttachment upload(MultipartHttpServletRequest dto, Long id) {
+    public ResponseEntity<?> upload(MultipartHttpServletRequest dto, Long id) {
         Iterator<String> filename = dto.getFileNames();
         LocalDate date = LocalDate.now();
         Optional<User> byUserId = userRepository.findById(id);
@@ -48,17 +49,17 @@ public class UserAttachmentServiceImpl implements AttachmentInterface {
                 multipartFile.transferTo(uploadfile);
 
 
-                UserAttachment userAttachment = new UserAttachment();
-                userAttachment.setName(multipartFile.getName());
-                userAttachment.setSize(multipartFile.getSize());
-                userAttachment.setContentType(multipartFile.getContentType());
-                userAttachment.setExtension(getExtention(multipartFile.getOriginalFilename()));
-                userAttachment.setPath(uploadfile.getPath());
-                attachmentrepository.save(userAttachment);
+                UserAttachment cooffeeAttachment = new UserAttachment();
+                cooffeeAttachment.setName(multipartFile.getName());
+                cooffeeAttachment.setSize(multipartFile.getSize());
+                cooffeeAttachment.setContentType(multipartFile.getContentType());
+                cooffeeAttachment.setExtension(getExtention(multipartFile.getOriginalFilename()));
+                cooffeeAttachment.setPath(uploadfile.getPath());
+                attachmentrepository.save(cooffeeAttachment);
 
 
                 byUserId.ifPresent(user -> {
-                    user.getAttachments().add(userAttachment);
+                    user.getAttachments().add(cooffeeAttachment);
                     userRepository.save(user);
                 });
             } catch (IOException e) {
@@ -66,7 +67,7 @@ public class UserAttachmentServiceImpl implements AttachmentInterface {
             }
 
         }
-        return null;
+        return ResponseEntity.ok().build();
     }
 
     private String getExtention(String filename) {

@@ -8,10 +8,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CoffeeAttachmentResponseDto {
-    private Long id;
+    private Long id ;
     private String name;
-    private String path;
-    private String contentType;
-    private String extension;
-    private Long size;
+    private String description;
+    private Double cost;
+    private String uri;
 }

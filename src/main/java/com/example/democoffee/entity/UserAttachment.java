@@ -22,7 +22,7 @@ public class UserAttachment implements Serializable {
     private String extension;
     private Long size;
 
-    @JoinColumn
+
     @ManyToOne
     private User user;
 }

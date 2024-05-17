@@ -22,7 +22,7 @@ public class CoffeeAttachment implements Serializable {
     private String extension;
     private Long size;
 
-    @JoinColumn
+
     @ManyToOne
     private Coffee coffee;
 }
