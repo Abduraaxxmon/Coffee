@@ -7,6 +7,12 @@ import com.example.democoffee.repository.UserAttachmentRepository;
 import com.example.democoffee.repository.UserRepository;
 import com.example.democoffee.service.UserAttachmentInterface;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.FileUrlResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,8 +39,7 @@ public class UserAttachmentServiceImpl implements UserAttachmentInterface {
 
         File folder = new File("upload" + date);
         if (!folder.exists()) {
-            folder.mkdir();
-            UserAttachmentResponseDto userAttachmentResponseDto = new UserAttachmentResponseDto();
+            folder.mkdirs();
 
         }
         while (filename.hasNext()) {
@@ -68,6 +73,22 @@ public class UserAttachmentServiceImpl implements UserAttachmentInterface {
 
         }
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<Resource> download(Long id) {
+         User user = userRepository.findById(id).get();
+         UserAttachment userAttachment = attachmentrepository.findById(user.getId()).get();
+
+         File file = new File(userAttachment.getPath());
+         if (!file.exists()) {
+             Resource resource = new FileSystemResource(file);
+             return ResponseEntity.ok()
+                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                     .header(HttpHeaders.CONTENT_DISPOSITION,"inline; filename=\""+userAttachment.getName()+userAttachment.getExtension())
+                     .body(resource);
+         }
+        return ResponseEntity.notFound().build();
     }
 
     private String getExtention(String filename) {

@@ -35,9 +35,9 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
         Iterator<String> filename = request.getFileNames();
         Optional<Coffee> coffeeById = coffeeRepository.findById(id);
 
-        File file = new File("uploadFile"+ LocalDate.now());
+        File file = new File("upload"+ LocalDate.now());
         if (!file.exists()) {
-            file.mkdir();
+            file.mkdirs();
         }
         while (filename.hasNext()) {
             String name = filename.next();
@@ -115,7 +115,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
             Resource resource = new FileSystemResource(file);
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\""+coffeeAttachment.getName()+"\""+coffeeAttachment.getExtension())
+                    .header(HttpHeaders.CONTENT_DISPOSITION,"inline; filename=\""+coffeeAttachment.getName()+"\""+coffeeAttachment.getExtension())
                     .body(resource);
         }
     }

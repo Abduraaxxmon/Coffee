@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @RestController
-@RequestMapping("/v1/-upload-attachment")
+@RequestMapping("/v1/coffee/attachment")
 @RequiredArgsConstructor
 public class CoffeeAttachmentController {
     private final CoffeeAttachmentAttachmentServiceImp service;
@@ -22,7 +22,7 @@ public class CoffeeAttachmentController {
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping("download")
+    @GetMapping("/download")
     public ResponseEntity<Resource> download(@RequestParam Long id){
         return service.dowload(id);
     }
