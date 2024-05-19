@@ -59,6 +59,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
             coffeeAttachmentRepository.save(cooffeeAttachment);
 
             multipartFile.transferTo(uploadfile);
+
             if (coffeeById.isPresent()){
                 Coffee coffee = coffeeById.get();
                 Set<CoffeeAttachment> coffeeAttachments = coffee.getAttachments();
