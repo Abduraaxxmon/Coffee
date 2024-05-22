@@ -8,6 +8,7 @@ import com.example.democoffee.model.CoffeeRequestDto;
 import com.example.democoffee.model.CoffeeResponseDto;
 import com.example.democoffee.repository.CategoryRepository;
 import com.example.democoffee.repository.CoffeeRepository;
+import com.example.democoffee.service.CardCountService;
 import com.example.democoffee.service.CoffeeAttachmentService;
 import com.example.democoffee.service.CoffeeService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CoffeeServiceIml implements CoffeeService {
+    private final CardCountService cardCountService;
     private final CoffeeRepository repository;
     private final CoffeeMap map;
     private final CategoryRepository catRepository;
@@ -43,8 +45,9 @@ public class CoffeeServiceIml implements CoffeeService {
     }
 
     @Override
-    public CoffeeAttachmentResponseDto readWithAttachment(Long coffeeId) {
+    public CoffeeAttachmentResponseDto readWithAttachment(Long userId,Long coffeeId) {
         Coffee coffee = repository.getReferenceById(coffeeId);
+        Long card = cardCountService.getCardCount(userId,coffeeId);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/v1/coffee/download/attachment/download")
@@ -58,6 +61,7 @@ public class CoffeeServiceIml implements CoffeeService {
                 .cost(coffee.getCost())
                 .rate(coffee.getRate())
                 .uri(uri)
+                .card(card)
                 .build();
 
     }

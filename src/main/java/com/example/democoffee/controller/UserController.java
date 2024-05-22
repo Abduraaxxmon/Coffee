@@ -34,6 +34,11 @@ public class UserController {
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(service.readAll());
     }
+    @PutMapping("/update/user-liked-coffee")
+    public ResponseEntity<?> updateUserLikedCoffee(@RequestParam Long userId, @RequestParam Long coffeeId) {
+        service.updateUserLikedCoffee(coffeeId,userId);
+        return ResponseEntity.ok().build();
+    }
 
     @PutMapping("/update")
     public ResponseEntity<?> updateById(@RequestParam Long id, @RequestBody UserRequestDto dto) {

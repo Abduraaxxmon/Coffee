@@ -24,8 +24,8 @@ public class CoffeeController {
     }
 
     @GetMapping("/read-with-attachment")
-    public ResponseEntity<?> getByIdWithAttachment(@RequestParam Long id) {
-        return ResponseEntity.ok(service.readWithAttachment(id));
+    public ResponseEntity<?> getByIdWithAttachment(@RequestParam Long userId, @RequestParam Long coffeeId) {
+        return ResponseEntity.ok(service.readWithAttachment(userId,coffeeId));
     }
 
     @GetMapping("/readAll")

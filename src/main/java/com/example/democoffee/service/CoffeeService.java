@@ -6,7 +6,7 @@ import com.example.democoffee.model.CoffeeResponseDto;
 
 public interface CoffeeService extends ServiceInterface<CoffeeRequestDto, CoffeeResponseDto>{
     Object getByCategory(Long category);
-    CoffeeAttachmentResponseDto readWithAttachment(Long id);
+    CoffeeAttachmentResponseDto readWithAttachment(Long userId, Long coffeeId);
     CoffeeResponseDto getByName(String name);
 
 }

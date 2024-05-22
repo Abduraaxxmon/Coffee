@@ -26,6 +26,6 @@ public class CardCount implements Serializable {
     private Coffee coffee;
 
     @Column(name = "count")
-    private Long count;
+    private Long count = 0L;
 
 }

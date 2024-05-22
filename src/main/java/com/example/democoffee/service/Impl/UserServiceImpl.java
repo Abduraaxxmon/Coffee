@@ -41,9 +41,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto read(Long id) {
-        return map
-                .toDto(repository
-                        .getReferenceById(id));
+        User user = repository.findById(id).orElse(null);
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                        .path("/v1/user/attachment/download")
+                                .queryParam("id",id)
+                                        .toUriString();
+
+        return UserResponseDto.builder()
+                .id(user.getId())
+                .firstname(user.getFirstName())
+                .lastname(user.getLastname())
+                .date(user.getDate())
+                .uri(uri)
+                .build();
+
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.democoffee.model;
 
+import com.example.democoffee.entity.Coffee;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -14,4 +15,5 @@ public class UserResponseDto {
     private String firstname;
     private String lastname;
     private LocalDate date;
+    private String uri;
 }
