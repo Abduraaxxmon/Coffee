@@ -1,6 +1,6 @@
 package com.example.democoffee.service;
 
-import org.springframework.http.ResponseEntity;
+import com.example.democoffee.entity.CoffeeAttachment;
 
 import java.util.List;
 

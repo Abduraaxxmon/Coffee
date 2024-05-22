@@ -3,6 +3,7 @@ package com.example.democoffee.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
@@ -33,4 +34,17 @@ public class User implements Serializable {
 //
     @OneToMany(mappedBy = "user")
     private Set<UserAttachment> attachments;
+
+    @ManyToMany
+    @JoinTable(
+            name = "likes",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "coffee_id")
+    )
+    private Set<Coffee> likes;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private Set<CardCount> cards;
+
+
 }

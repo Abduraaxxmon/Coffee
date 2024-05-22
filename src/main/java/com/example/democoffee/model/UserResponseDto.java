@@ -14,5 +14,4 @@ public class UserResponseDto {
     private String firstname;
     private String lastname;
     private LocalDate date;
-
 }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name ="attachment_coffee")
+@Table(name = "attachment_coffee")
 public class CoffeeAttachment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

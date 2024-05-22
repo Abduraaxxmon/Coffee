@@ -13,4 +13,6 @@ public class CoffeeAttachmentResponseDto {
     private String description;
     private Double cost;
     private String uri;
+    private Double rate;
+
 }

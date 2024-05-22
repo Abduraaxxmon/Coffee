@@ -26,15 +26,27 @@ public class Coffee implements Serializable {
     @Column(name = "cost", nullable = false)
     private Double cost;
 
+    @Column(name = "rate",nullable = false)
+    private Double rate;
+
+    @Column(name = "size",nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Size size;
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id",referencedColumnName = "id")
     private Category category;
 
-    @OneToMany(mappedBy = "coffeeId")
-    private Set<Like> likes;
-
     @OneToMany(mappedBy = "coffee", cascade = CascadeType.ALL)
     private Set<CoffeeAttachment> attachments;
 
+    @ManyToMany(mappedBy = "likes")
+    private Set<User> likedByUser;
+
+    @OneToMany(mappedBy = "id")
+    private Set<User> users;
+
+    @OneToMany(mappedBy = "coffee",cascade = CascadeType.ALL)
+    private Set<CardCount> coffees;
 }

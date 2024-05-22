@@ -1,6 +1,5 @@
 package com.example.democoffee.controller;
 
-import com.example.democoffee.service.Impl.CoffeeAttachmentAttachmentServiceImp;
 import com.example.democoffee.service.Impl.UserAttachmentServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -15,12 +14,12 @@ public class UserAttachmentController {
     private final UserAttachmentServiceImpl service;
 
     @PostMapping("/post")
-    public ResponseEntity<?> upload(MultipartHttpServletRequest request, @RequestParam Long id){
-        return ResponseEntity.ok(service.upload(request,id));
+    public ResponseEntity<?> upload(MultipartHttpServletRequest request, @RequestParam Long id) {
+        return ResponseEntity.ok(service.upload(request, id));
     }
 
     @GetMapping("/download")
-    public ResponseEntity<Resource> download(@RequestParam Long id){
+    public ResponseEntity<Resource> download(@RequestParam Long id) {
         return service.download(id);
     }
 }

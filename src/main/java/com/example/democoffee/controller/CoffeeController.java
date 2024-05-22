@@ -1,6 +1,7 @@
 package com.example.democoffee.controller;
 
 import com.example.democoffee.model.CoffeeRequestDto;
+import com.example.democoffee.model.CoffeeResponseDto;
 import com.example.democoffee.service.CoffeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,29 @@ public class CoffeeController {
         return ResponseEntity.ok(service.read(id));
     }
 
+    @GetMapping("/read-with-attachment")
+    public ResponseEntity<?> getByIdWithAttachment(@RequestParam Long id) {
+        return ResponseEntity.ok(service.readWithAttachment(id));
+    }
+
     @GetMapping("/readAll")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(service.readAll());
     }
 
+    @GetMapping("/getByCategory")
+    public ResponseEntity<?> getByCategory(@RequestParam Long id) {
+        return ResponseEntity.ok(service.getByCategory(id));
+    }
+
     @PutMapping("/update")
     public ResponseEntity<?> updateById(@RequestParam Long id, @RequestBody CoffeeRequestDto dto) {
         return ResponseEntity.ok(service.update(id, dto));
+    }
+
+    @GetMapping("/getByName")
+    public CoffeeResponseDto getByName(@RequestParam String name) {
+        return service.getByName(name);
     }
 
     @DeleteMapping("delete")

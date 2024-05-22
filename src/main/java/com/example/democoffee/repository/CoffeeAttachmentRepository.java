@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface CoffeeAttachmentRepository extends JpaRepository<CoffeeAttachment,Long> {
-
+    
 }

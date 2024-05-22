@@ -1,10 +1,13 @@
 package com.example.democoffee.controller;
 
+import com.example.democoffee.model.CoffeeAttachmentResponseDto;
 import com.example.democoffee.model.UserRequestDto;
 import com.example.democoffee.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -20,6 +23,11 @@ public class UserController {
     @GetMapping("/read")
     public ResponseEntity<?> getById(@RequestParam Long id) {
         return ResponseEntity.ok(service.read(id));
+    }
+
+    @GetMapping("/get-user-liked-coffee")
+    ResponseEntity<List<CoffeeAttachmentResponseDto>> getUserLikedAttachments(@RequestParam Long userId) {
+        return ResponseEntity.ok(service.readUserLikedCoffee(userId));
     }
 
     @GetMapping("/readAll")
@@ -40,6 +48,12 @@ public class UserController {
             service.delete(id);
             return ResponseEntity.ok().build();
         }
+    }
+
+    @DeleteMapping("delete-user-liked-coffee")
+    public ResponseEntity<?> deleteUserLikedCoffee(@RequestParam Long userId, @RequestParam Long coffeeId) {
+        service.deleteUserLikedCoffee(coffeeId, userId);
+        return ResponseEntity.ok().build();
     }
 }
 

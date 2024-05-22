@@ -1,16 +1,15 @@
 package com.example.democoffee.service.Impl;
 
-import com.example.democoffee.entity.CoffeeAttachment;
 import com.example.democoffee.entity.Coffee;
+import com.example.democoffee.entity.CoffeeAttachment;
 import com.example.democoffee.model.CoffeeAttachmentResponseDto;
 import com.example.democoffee.repository.CoffeeAttachmentRepository;
 import com.example.democoffee.repository.CoffeeRepository;
 import com.example.democoffee.service.CoffeeAttachmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.apache.tomcat.util.file.ConfigurationSource;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +34,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
         Iterator<String> filename = request.getFileNames();
         Optional<Coffee> coffeeById = coffeeRepository.findById(id);
 
-        File file = new File("upload"+ LocalDate.now());
+        File file = new File("upload" + LocalDate.now());
         if (!file.exists()) {
             file.mkdirs();
         }
@@ -43,10 +42,10 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
             String name = filename.next();
             MultipartFile multipartFile = request.getFile(name);
             String ext = getExtention(multipartFile.getOriginalFilename());
-            String fileUniqName = UUID.randomUUID().toString()+ext;
+            String fileUniqName = UUID.randomUUID().toString() + ext;
 
             File uploadfile = new File(
-                    file.getAbsolutePath() + "/" +fileUniqName);
+                    file.getAbsolutePath() + "/" + fileUniqName);
 
             CoffeeAttachment cooffeeAttachment = new CoffeeAttachment();
             cooffeeAttachment.setName(multipartFile.getName());
@@ -60,7 +59,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
 
             multipartFile.transferTo(uploadfile);
 
-            if (coffeeById.isPresent()){
+            if (coffeeById.isPresent()) {
                 Coffee coffee = coffeeById.get();
                 Set<CoffeeAttachment> coffeeAttachments = coffee.getAttachments();
                 coffeeAttachments.add(cooffeeAttachment);
@@ -80,9 +79,9 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
         List<CoffeeAttachmentResponseDto> coffeeAttachments = new ArrayList<>();
         Iterable<CoffeeAttachment> iterator = coffeeAttachmentRepository.findAll();
 
-        iterator.forEach( iter ->{
+        iterator.forEach(iter -> {
             Optional<Coffee> coffeeOpt = coffeeRepository.findById(iter.getCoffee().getId());
-            Coffee coffee  = coffeeOpt.get();
+            Coffee coffee = coffeeOpt.get();
 
             String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                     .path("/v1/-upload-attachment/download")
@@ -100,7 +99,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
             coffeeAttachments.add(dto);
         });
 
-         return coffeeAttachments;
+        return coffeeAttachments;
     }
 
     @Override
@@ -109,7 +108,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
         Optional<CoffeeAttachment> attachment = coffeeAttachmentRepository.findById(id);
 
         if (attachment.isPresent()) {
-        CoffeeAttachment coffeeAttachment = attachment.get();
+            CoffeeAttachment coffeeAttachment = attachment.get();
 
         File file = new File(coffeeAttachment.getPath());
         if (file.exists()) {
@@ -126,5 +125,34 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
 
     private String getExtention(String filename) {
         return filename.substring(filename.lastIndexOf("."));
+    }
+
+    private MediaType getMimeType(String extension) {
+        MediaType mediaType;
+        switch (extension.toLowerCase()) {
+            case "pdf":
+                mediaType = MediaType.APPLICATION_PDF;
+                break;
+            case "jpg":
+            case "jpeg":
+                mediaType = MediaType.IMAGE_JPEG;
+                break;
+            case "png":
+                mediaType = MediaType.IMAGE_PNG;
+                break;
+            case "gif":
+                mediaType = MediaType.IMAGE_GIF;
+                break;
+            case "html":
+                mediaType = MediaType.TEXT_HTML;
+                break;
+            case "txt":
+                mediaType = MediaType.TEXT_PLAIN;
+                break;
+            default:
+                mediaType = MediaType.APPLICATION_OCTET_STREAM;
+                break;
+        }
+        return mediaType;
     }
 }

@@ -11,7 +11,6 @@ import java.util.List;
 public interface CoffeeAttachmentService {
     public CoffeeAttachment upload(Long id, MultipartHttpServletRequest request);
     public List<CoffeeAttachmentResponseDto> getAll();
-
     ResponseEntity<Resource> dowload(Long id);
 
 }
