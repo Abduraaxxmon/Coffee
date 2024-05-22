@@ -1,5 +1,6 @@
 package com.example.democoffee.model;
 
+import com.example.democoffee.entity.Size;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -13,6 +14,8 @@ public class CoffeeRequestDto {
     private String name;
     private String description;
     private Double cost;
-    private CategoryResponseDto category;
     private Double rate;
+    private Size size;
+    private CategoryResponseDto category;
+
 }

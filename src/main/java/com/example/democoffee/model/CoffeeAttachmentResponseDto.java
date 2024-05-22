@@ -1,5 +1,6 @@
 package com.example.democoffee.model;
 
+import com.example.democoffee.entity.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -16,4 +17,5 @@ public class CoffeeAttachmentResponseDto {
     private String uri;
     private Double rate;
     private Long card;
+    private Size size;
 }

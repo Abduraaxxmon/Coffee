@@ -34,6 +34,7 @@ public class CoffeeServiceIml implements CoffeeService {
                 .category(category)
                 .cost(dto.getCost())
                 .rate(dto.getRate())
+                .size(dto.getSize())
                 .build();
 
         return map.toDto(repository
@@ -62,6 +63,7 @@ public class CoffeeServiceIml implements CoffeeService {
                 .cost(coffee.getCost())
                 .rate(coffee.getRate())
                 .uri(uri)
+                .size(coffee.getSize())
                 .card(card)
                 .build();
 
@@ -78,8 +80,11 @@ public class CoffeeServiceIml implements CoffeeService {
     public CoffeeResponseDto update(Long id, CoffeeRequestDto dto) {
         Coffee coffee = repository.getReferenceById(id);
         coffee.setCategory(catRepository.getReferenceById(dto.getCategory().getId()));
+
         coffee.setName(dto.getName());
         coffee.setCost(dto.getCost());
+        coffee.setRate(dto.getRate());
+        coffee.setSize(dto.getSize());
         coffee.setRate(dto.getRate());
         coffee.setDescription(dto.getDescription());
 
