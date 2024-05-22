@@ -33,7 +33,7 @@ public class CoffeeController {
         return ResponseEntity.ok(service.readAll());
     }
 
-    @GetMapping("/getByCategory")
+    @GetMapping("/getCoffees-ByCategory")
     public ResponseEntity<?> getByCategory(@RequestParam Long id) {
         return ResponseEntity.ok(service.getByCategory(id));
     }
