@@ -41,10 +41,10 @@ public class Coffee implements Serializable {
     @OneToMany(mappedBy = "coffee", cascade = CascadeType.ALL)
     private Set<CoffeeAttachment> attachments;
 
-    @ManyToMany(mappedBy = "likes")
+    @ManyToMany(mappedBy = "likes",cascade = CascadeType.ALL)
     private Set<User> likedByUser;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "id",cascade = CascadeType.ALL)
     private Set<User> users;
 
     @OneToMany(mappedBy = "coffee",cascade = CascadeType.ALL)

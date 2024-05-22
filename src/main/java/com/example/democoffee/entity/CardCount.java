@@ -22,7 +22,7 @@ public class CardCount implements Serializable {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "coffee_id", referencedColumnName = "id", unique = true)
+    @JoinColumn(name = "coffee_id", referencedColumnName = "id", unique = true,nullable = false)
     private Coffee coffee;
 
     @Column(name = "count")

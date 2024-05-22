@@ -35,7 +35,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private Set<UserAttachment> attachments;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "likes",
             joinColumns = @JoinColumn(name = "user_id"),

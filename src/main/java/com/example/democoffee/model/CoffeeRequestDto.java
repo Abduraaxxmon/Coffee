@@ -14,4 +14,5 @@ public class CoffeeRequestDto {
     private String description;
     private Double cost;
     private CategoryResponseDto category;
+    private Double rate;
 }
