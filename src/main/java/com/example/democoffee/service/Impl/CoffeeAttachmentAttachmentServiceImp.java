@@ -93,6 +93,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
                     .cost(coffee.getCost())
                     .name(iter.getName())
                     .description(coffee.getDescription())
+                    .rate(coffee.getRate())
                     .uri(uri)
                     .build();
 
