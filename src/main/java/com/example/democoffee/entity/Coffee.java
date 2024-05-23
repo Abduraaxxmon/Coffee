@@ -31,7 +31,7 @@ public class Coffee implements Serializable {
 
     @Column(name = "size",nullable = false)
     @Enumerated(EnumType.STRING)
-    private Size size;
+    private Size coffeeSize;
 
 
     @ManyToOne(cascade = CascadeType.ALL)

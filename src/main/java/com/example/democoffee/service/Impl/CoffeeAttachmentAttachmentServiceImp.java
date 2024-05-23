@@ -49,7 +49,7 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
 
             CoffeeAttachment cooffeeAttachment = new CoffeeAttachment();
             cooffeeAttachment.setName(multipartFile.getName());
-            cooffeeAttachment.setSize(multipartFile.getSize());
+            cooffeeAttachment.setPictureSize(multipartFile.getSize());
             cooffeeAttachment.setExtension(ext);
             cooffeeAttachment.setContentType(multipartFile.getContentType());
             cooffeeAttachment.setPath(uploadfile.getPath());
@@ -94,6 +94,8 @@ public class CoffeeAttachmentAttachmentServiceImp implements CoffeeAttachmentSer
                     .name(iter.getName())
                     .description(coffee.getDescription())
                     .rate(coffee.getRate())
+                    .pictureSize(iter.getPictureSize())
+                    .coffeeSize(coffee.getCoffeeSize())
                     .uri(uri)
                     .build();
 

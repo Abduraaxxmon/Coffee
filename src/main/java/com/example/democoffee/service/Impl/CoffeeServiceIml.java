@@ -34,7 +34,7 @@ public class CoffeeServiceIml implements CoffeeService {
                 .category(category)
                 .cost(dto.getCost())
                 .rate(dto.getRate())
-                .size(dto.getSize())
+                .coffeeSize(dto.getCoffeeSize())
                 .build();
 
         return map.toDto(repository
@@ -63,7 +63,7 @@ public class CoffeeServiceIml implements CoffeeService {
                 .cost(coffee.getCost())
                 .rate(coffee.getRate())
                 .uri(uri)
-                .size(coffee.getSize())
+                .coffeeSize(coffee.getCoffeeSize())
                 .card(card)
                 .build();
 
@@ -84,7 +84,7 @@ public class CoffeeServiceIml implements CoffeeService {
         coffee.setName(dto.getName());
         coffee.setCost(dto.getCost());
         coffee.setRate(dto.getRate());
-        coffee.setSize(dto.getSize());
+        coffee.setCoffeeSize(dto.getCoffeeSize());
         coffee.setRate(dto.getRate());
         coffee.setDescription(dto.getDescription());
 

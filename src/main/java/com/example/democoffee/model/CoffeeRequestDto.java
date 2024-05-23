@@ -15,7 +15,7 @@ public class CoffeeRequestDto {
     private String description;
     private Double cost;
     private Double rate;
-    private Size size;
+    private Size coffeeSize;
     private CategoryResponseDto category;
 
 }

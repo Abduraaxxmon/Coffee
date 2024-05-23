@@ -15,16 +15,22 @@ import java.io.Serializable;
 public class UserAttachment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(nullable = false)
     private Long id;
+
     @Column(nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String path;
+
     @Column(nullable = false)
     private String contentType;
+
     @Column(nullable = false)
     private String extension;
+
     @Column(nullable = false)
     private Long size;
 

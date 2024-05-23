@@ -13,5 +13,5 @@ public class UserAttachmentResponseDto {
     private String path;
     private String contentType;
     private String extension;
-    private Long size;
+
 }

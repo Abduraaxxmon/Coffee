@@ -17,5 +17,6 @@ public class CoffeeAttachmentResponseDto {
     private String uri;
     private Double rate;
     private Long card;
-    private Size size;
+    private Long pictureSize;
+    private Size coffeeSize;
 }
